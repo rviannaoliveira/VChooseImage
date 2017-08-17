@@ -18,19 +18,19 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <ImageButton
+        <Button
             android:id="@+id/rejectBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/ic_cancel"
+            android:background="@drawable/selector_cancel"
             android:contentDescription="@string/reject"/>
 
-        <ImageButton
+        <Button
             android:id="@+id/acceptBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="30dp"
-            android:background="@drawable/ic_ok"
+            android:background="@drawable/selector_ok"
             android:contentDescription="@string/like"/>
     </LinearLayout>
 
