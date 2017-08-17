@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">VChooseImage</string>
+    <string name="image">image</string>
+    <string name="reject">reject</string>
+    <string name="like">like</string>
+    <string name="accept">Accept</string>
+</resources>
