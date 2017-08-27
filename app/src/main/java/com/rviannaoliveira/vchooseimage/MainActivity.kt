@@ -2,20 +2,18 @@ package com.rviannaoliveira.vchooseimage
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 import com.mindorks.placeholderview.SwipeDecor
 import com.mindorks.placeholderview.SwipePlaceHolderView
 import com.mindorks.placeholderview.SwipeViewBuilder
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private var swipeView: SwipePlaceHolderView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        swipeView = findViewById<SwipePlaceHolderView>(R.id.swipeView)
 
         val swipeDecor = SwipeDecor().apply {
             paddingTop = 20
@@ -33,9 +31,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val btnReject = findViewById<View>(R.id.rejectBtn)
-        val btnAccept = findViewById<View>(R.id.acceptBtn)
-        btnReject.setOnClickListener { swipeView?.doSwipe(false) }
-        btnAccept.setOnClickListener { swipeView?.doSwipe(true) }
+        rejectBtn.setOnClickListener { swipeView?.doSwipe(false) }
+        acceptBtn.setOnClickListener { swipeView?.doSwipe(true) }
     }
 }
