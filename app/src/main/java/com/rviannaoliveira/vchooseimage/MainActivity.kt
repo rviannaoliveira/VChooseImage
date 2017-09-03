@@ -2,6 +2,7 @@ package com.rviannaoliveira.vchooseimage
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import br.com.zap.imoveis.ui.fragments.DetailBottomSheetDialogFragment
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainView.ScreenView, MainView.VisionView {
     private lateinit var vision: Vision
+    private var count: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +61,21 @@ class MainActivity : AppCompatActivity(), MainView.ScreenView, MainView.VisionVi
         progressBar.visibility = View.VISIBLE
         VisionApi.callCloudVision(bitmap, vision, this@MainActivity)
     }
+
+    override fun sendSomeWhere() {
+        count += 1
+        if (count == 5) {
+            progressBar.visibility = View.VISIBLE
+            txt_send.visibility = View.VISIBLE
+
+            Handler().postDelayed({
+                progressBar.visibility = View.GONE
+                txt_send.visibility = View.GONE
+                count = 0
+            }, 3000)
+        }
+    }
+
 
     override fun showModalDetail(list: MutableList<EntityAnnotation>) {
         progressBar.visibility = View.GONE

@@ -62,6 +62,7 @@ internal class SwipeCard(private val profile: Places,
     @SwipeIn
     private fun onSwipeIn() {
         Log.d("EVENT", "onSwipedIn")
+        screenView.sendSomeWhere()
     }
 
     @SwipeInState

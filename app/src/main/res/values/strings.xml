@@ -4,4 +4,5 @@
     <string name="reject">reject</string>
     <string name="like">like</string>
     <string name="accept">Accept</string>
+    <string name="send_Data">Enviando dados...</string>
 </resources>

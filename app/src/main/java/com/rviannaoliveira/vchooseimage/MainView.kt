@@ -10,6 +10,7 @@ interface MainView {
 
     interface ScreenView {
         fun loadVision(bitmap: Bitmap?)
+        fun sendSomeWhere()
     }
 
     interface VisionView {
