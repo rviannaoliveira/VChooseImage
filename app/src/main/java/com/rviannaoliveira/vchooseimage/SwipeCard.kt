@@ -1,11 +1,14 @@
 package com.rviannaoliveira.vchooseimage
 
-import android.content.Context
+import android.graphics.Bitmap
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.animation.GlideAnimation
+import com.bumptech.glide.request.target.SimpleTarget
 import com.mindorks.placeholderview.SwipePlaceHolderView
+import com.mindorks.placeholderview.annotations.Click
 import com.mindorks.placeholderview.annotations.Layout
 import com.mindorks.placeholderview.annotations.Resolve
 import com.mindorks.placeholderview.annotations.View
@@ -16,7 +19,9 @@ import com.mindorks.placeholderview.annotations.swipe.*
  */
 
 @Layout(R.layout.tinder_card_view)
-internal class TinderCard(private val context: Context, private val profile: Places, private val swipeView: SwipePlaceHolderView) {
+internal class SwipeCard(private val profile: Places,
+                         private val swipeView: SwipePlaceHolderView,
+                         private val screenView: MainView.ScreenView) {
 
     @View(R.id.profileImageView)
     private val profileImageView: ImageView? = null
@@ -27,9 +32,18 @@ internal class TinderCard(private val context: Context, private val profile: Pla
     @View(R.id.locationNameTxt)
     private val locationNameTxt: TextView? = null
 
+    private var bitMap: Bitmap? = null
+
     @Resolve
     private fun onResolved() {
-        Glide.with(context).load(profile.imageUrl).into(profileImageView)
+        val load = Glide.with(VApplication.context).load(profile.imageUrl)
+        load.into(profileImageView)
+        load.asBitmap()
+                .into(object : SimpleTarget<Bitmap>(100, 100) {
+                    override fun onResourceReady(resource: Bitmap?, glideAnimation: GlideAnimation<in Bitmap>?) {
+                        this@SwipeCard.bitMap = resource
+                    }
+                })
         nameAgeTxt?.text = profile.place
         locationNameTxt?.text = profile.country
     }
@@ -58,5 +72,11 @@ internal class TinderCard(private val context: Context, private val profile: Pla
     @SwipeOutState
     private fun onSwipeOutState() {
         Log.d("EVENT", "onSwipeOutState")
+    }
+
+    @Click(R.id.profileImageView)
+    private fun onClick() {
+        Log.d("EVENT", "click")
+        screenView.loadVision(bitMap)
     }
 }
