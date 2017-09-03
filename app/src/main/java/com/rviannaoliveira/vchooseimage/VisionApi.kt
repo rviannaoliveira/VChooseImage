@@ -14,6 +14,7 @@ import java.util.*
 
 /**
  * Criado por rodrigo on 03/09/17.
+ * http://www.truiton.com/2016/06/android-image-recognition-google-cloud-vision-api/
  */
 object VisionApi {
 
